@@ -23,7 +23,7 @@
 //    допишите строку url.
 // ============================================================
 
-import { LangSwitch, useBi, useLang, useL, type Bi } from '@/lib/i18n'
+import { LangSwitch, useBi, useLang, useL, type Bi, useTitle } from '@/lib/i18n'
 
 interface ProspectBlock {
   icon: string
@@ -70,7 +70,7 @@ const GAMES: GameMeta[] = [
     title: { uk: 'Соціонічний тренажер', ru: 'Соционический тренажёр' },
     desc: {
       uk: 'Вікторина за 16 типами: від дихотомій до моделі А та інтертипних стосунків.',
-      ru: 'Викторина по 16 типам: от дихотомий до модель А и интертипных отношений.',
+      ru: 'Викторина по 16 типам: от дихотомий до модели А и интертипных отношений.',
     },
     url: 'https://socionika.vercel.app',
     chip: 'bg-emerald-100',
@@ -226,6 +226,8 @@ function Footer() {
 
 export default function Portal() {
   const L = useL()
+  useTitle('Ігротека — сапер, тренажер, «Браво» і міністерство', 'Игротека — сапер, тренажер, «Браво» и министерство')
+
   const B = useBi()
   const lang = useLang()
   const gameHref = (url: string) => (lang === 'ru' ? `${url}?lang=ru` : url)
