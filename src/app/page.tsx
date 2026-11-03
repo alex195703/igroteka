@@ -23,7 +23,7 @@
 //    допишите строку url.
 // ============================================================
 
-import { LangSwitch, useBi, useL, type Bi } from '@/lib/i18n'
+import { LangSwitch, useBi, useLang, useL, type Bi } from '@/lib/i18n'
 
 interface ProspectBlock {
   icon: string
@@ -227,6 +227,8 @@ function Footer() {
 export default function Portal() {
   const L = useL()
   const B = useBi()
+  const lang = useLang()
+  const gameHref = (url: string) => (lang === 'ru' ? `${url}?lang=ru` : url)
   return (
     <div className="relative flex min-h-screen flex-col bg-gradient-to-b from-zinc-50 via-white to-zinc-50">
       {/* Перемикач мови — праворуч зверху */}
@@ -254,7 +256,7 @@ export default function Portal() {
             g.url ? (
               <a
                 key={g.url}
-                href={g.url}
+                href={gameHref(g.url)}
                 aria-label={L(
                   `Відкрити гру «${B(g.title)}» на сайті ${new URL(g.url).hostname}`,
                   `Открыть игру «${B(g.title)}» на сайте ${new URL(g.url).hostname}`,
@@ -317,7 +319,7 @@ export default function Portal() {
                         {new URL(g.url).hostname}
                       </span>
                       <a
-                        href={g.url}
+                        href={gameHref(g.url)}
                         className={`rounded-lg border border-zinc-300 bg-white px-3 py-1.5 text-sm font-semibold transition-colors hover:bg-zinc-100 ${g.link}`}
                       >
                         {L('Відкрити гру ↗', 'Открыть игру ↗')}
