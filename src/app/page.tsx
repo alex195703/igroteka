@@ -212,6 +212,7 @@ const GAMES: GameMeta[] = [
   },
   {
     emoji: '🇩🇪',
+    url: 'https://deutsch-alexs-projects-82e4c164.vercel.app',
     title: { uk: 'Німецька A1', ru: 'Немецкий A1' },
     desc: {
       uk: 'Тренажер для початківців: 152 слова з озвучкою, картки, вікторина, артиклі der/die/das, дієслова і шпаргалка з граматики.',
