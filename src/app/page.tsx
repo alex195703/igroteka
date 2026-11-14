@@ -261,9 +261,12 @@ export default function Portal() {
       <main className="flex-1">
         {/* Герой */}
         <section className="px-4 pb-4 pt-14 text-center">
-          <div className="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-zinc-900 text-4xl shadow-lg">
-            🎮
-          </div>
+          {/* Аватар власника колекції — фото лежить у public/avatar.png */}
+          <img
+            src="/avatar.png"
+            alt={L('Аватар автора колекції', 'Аватар автора коллекции')}
+            className="mx-auto h-20 w-20 rounded-2xl object-cover shadow-lg ring-1 ring-zinc-200"
+          />
           <h1 className="mt-5 text-4xl font-black tracking-tight text-zinc-900 sm:text-5xl">
             {L('Ігротека', 'Игротека')}
           </h1>
