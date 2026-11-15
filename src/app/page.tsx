@@ -23,6 +23,7 @@
 //    допишите строку url.
 // ============================================================
 
+import { useState } from 'react'
 import { LangSwitch, useBi, useLang, useL, type Bi, useTitle } from '@/lib/i18n'
 
 interface ProspectBlock {
@@ -245,6 +246,50 @@ function Footer() {
   )
 }
 
+// Бейдж автора: аватар, при наведенні або кліку показує ім'я та email
+function AuthorBadge({
+  className = '',
+  size = 'h-16 w-16',
+  ring = 'ring-zinc-200',
+  img = '/avatar.png',
+  align = 'center',
+}: {
+  className?: string
+  size?: string
+  ring?: string
+  img?: string
+  align?: 'center' | 'left'
+}) {
+  const L = useL()
+  const [tip, setTip] = useState(false)
+  return (
+    <div className={`group relative inline-block ${className}`}>
+      <button
+        type="button"
+        onClick={() => setTip((v) => !v)}
+        aria-label={L('Автор — контакти', 'Автор — контакты')}
+        className="block cursor-pointer rounded-2xl focus:outline-none"
+      >
+        <img
+          src={img}
+          alt={L('Аватар автора', 'Аватар автора')}
+          className={`${size} rounded-2xl object-cover shadow-lg ring-1 ${ring}`}
+        />
+      </button>
+      <div
+        className={`absolute top-full z-30 mt-2 rounded-xl bg-zinc-900/95 px-3 py-2 text-center text-xs leading-relaxed text-white shadow-xl ring-1 ring-white/10 ${
+          align === 'center' ? 'left-1/2 -translate-x-1/2' : 'left-0'
+        } ${tip ? 'opacity-100' : 'pointer-events-none opacity-0 group-hover:pointer-events-auto group-hover:opacity-100'}`}
+      >
+        <span className="block whitespace-nowrap font-semibold">{L('Автор: проф. Орлов О.В.', 'Автор: проф. Орлов А.В.')}</span>
+        <a href="mailto:avorlovav@gmail.com" className="whitespace-nowrap underline decoration-zinc-500 underline-offset-2">
+          avorlovav@gmail.com
+        </a>
+      </div>
+    </div>
+  )
+}
+
 export default function Portal() {
   const L = useL()
   useTitle('Ігротека професора Орлова О.В. — сапер, соціоніка, «Браво», міністерство і німецька', 'Игротека профессора Орлова А.В. — сапер, соционика, «Браво», министерство и немецкий')
@@ -261,12 +306,8 @@ export default function Portal() {
       <main className="flex-1">
         {/* Герой */}
         <section className="px-4 pb-4 pt-14 text-center">
-          {/* Аватар власника колекції — фото лежить у public/avatar.png */}
-          <img
-            src="/avatar.png"
-            alt={L('Аватар автора колекції', 'Аватар автора коллекции')}
-            className="mx-auto h-20 w-20 rounded-2xl object-cover shadow-lg ring-1 ring-zinc-200"
-          />
+          {/* Аватар власника колекції — клік або наведення показує контакти */}
+          <AuthorBadge size="h-20 w-20" />
           <h1 className="mt-5 text-4xl font-black tracking-tight text-zinc-900 sm:text-5xl">
             {L('Ігротека', 'Игротека')}
           </h1>
